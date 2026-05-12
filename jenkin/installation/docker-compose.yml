@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  jenkins:
+    build: .
+    container_name: jenkins-controller
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      - JAVA_OPTS=-Xms1g -Xmx2g
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - ./casc_configs:/var/jenkins_home/casc_configs
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:

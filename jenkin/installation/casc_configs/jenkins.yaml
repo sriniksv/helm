@@ -1,0 +1,19 @@
+jenkins:
+  systemMessage: "Production Jenkins - Ready"
+
+  numExecutors: 0   # IMPORTANT (controller should not run builds)
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: admin
+          password: admin123
+
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+unclassified:
+  location:
+    url: http://localhost:8080/
