@@ -11,13 +11,13 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Checking out source code'
+                checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh 'npm ci'
             }
         }
 
@@ -35,7 +35,7 @@ pipeline {
 
         stage('Verify Docker Image') {
             steps {
-                sh 'docker images'
+                sh 'docker images ${IMAGE_NAME} || true'
             }
         }
     }

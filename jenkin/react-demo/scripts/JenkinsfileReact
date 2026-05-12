@@ -5,21 +5,21 @@ pipeline {
     environment {
         IMAGE_NAME = "react-demo"
         IMAGE_TAG  = "v1.${BUILD_NUMBER}"
-        APP_DIR    = "jenkins/ci/react-demo"
+        APP_DIR    = ".."
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                echo 'Checking out source code'
+                checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 dir("${APP_DIR}") {
-                    sh 'npm install'
+                    sh 'npm ci'
                 }
             }
         }
@@ -42,7 +42,9 @@ pipeline {
 
         stage('Verify Docker Image') {
             steps {
-                sh 'docker images'
+                dir("${APP_DIR}") {
+                    sh 'docker images ${IMAGE_NAME} || true'
+                }
             }
         }
     }

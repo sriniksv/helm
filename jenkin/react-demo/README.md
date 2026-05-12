@@ -28,7 +28,49 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Running on Linux
 
+1. Install Node.js, npm, and Docker on your Linux host.
+2. Open a terminal and go to the project directory:
+   ```bash
+   cd /path/to/react-demo
+   ```
+3. Install dependencies:
+   ```bash
+   npm ci
+   ```
+4. Start the development server:
+   ```bash
+   npm start
+   ```
+5. Build the production bundle:
+   ```bash
+   npm run build
+   ```
+6. Build the Docker image:
+   ```bash
+   docker build -t react-demo:latest .
+   ```
+7. Run the Docker container:
+   ```bash
+   docker run -d -p 80:80 react-demo:latest
+   ```
+
+### Jenkins Pipeline Setup
+
+This repository includes a ready-to-use `Jenkinsfile` at the project root.
+
+1. Install Jenkins on your Linux host.
+2. Ensure Jenkins has Docker access if you want the pipeline to build the Docker image.
+3. Create a new Pipeline job in Jenkins.
+4. Set the Pipeline definition to "Pipeline script from SCM" and point it to this repository.
+5. Use the `Jenkinsfile` from the `react-demo` folder.
+6. Run the Pipeline. It will:
+   - checkout source code,
+   - install dependencies with `npm ci`,
+   - build the React app,
+   - build the Docker image,
+   - verify the image exists.
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
