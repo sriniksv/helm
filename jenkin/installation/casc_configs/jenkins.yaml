@@ -1,7 +1,7 @@
 jenkins:
   systemMessage: "Production Jenkins - Ready"
 
-  numExecutors: 1   # Set to 1 so the controller can execute pipeline builds
+  numExecutors: 0   # IMPORTANT (controller should not run builds)
 
   securityRealm:
     local:
